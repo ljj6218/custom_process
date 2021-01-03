@@ -1,12 +1,6 @@
 from app import app, login_manager, db
-from marshmallows import *
-from utils import *
-from forms import *
 from views import *
 import settings
-
-from flask import render_template, redirect, url_for, request
-from flask_login import current_user, login_required, login_user, logout_user
 
 
 @login_manager.user_loader
@@ -29,9 +23,7 @@ def login():
 # 首页
 @app.route('/')
 def index():
-    if current_user.is_authenticated:
-        return render_template('index.html', username=current_user.username)
-    return render_template('index.html', username=None)
+    return index_view()
 
 
 # 登出

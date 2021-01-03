@@ -10,6 +10,12 @@ from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_required, login_user, logout_user
 
 
+def index_view():
+    if current_user.is_authenticated:
+        return render_template('index.html', username=current_user.username)
+    return render_template('index.html', username=None)
+
+
 # 用户  注册
 def register_view():
     form = RegisterForm()
