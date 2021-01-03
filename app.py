@@ -15,9 +15,9 @@ db = SQLAlchemy(app)
 
 basic_auth = BasicAuth(app)
 
-# login_manager = LoginManager()  # 实例化登录管理对象
-# login_manager.init_app(app)  # 初始化应用
-# login_manager.login_view = 'login'  # 设置用户登录视图函数 endpoint
+login_manager = LoginManager()  # 实例化登录管理对象
+login_manager.init_app(app)  # 初始化应用
+login_manager.login_view = 'login'  # 设置用户登录视图函数 endpoint
 
 # 注册admin、中间件
 from register import *
