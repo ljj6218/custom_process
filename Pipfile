@@ -13,6 +13,8 @@ flask-whooshalchemy = "*"
 marshmallow-sqlalchemy = "*"
 flask-sqlacodegen = "*"
 pymysql = "*"
+flask-basicauth = "*"
+flask-wtf = "*"
 
 [dev-packages]
 

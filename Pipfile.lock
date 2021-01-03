@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ec6d78baa5d727348ae4a146b9903a189c9d5537074566821e07b9febbef27d5"
+            "sha256": "59bf18bba7a29bb93d985ebe311745e4cf8807f510e3ab9870c3c507a730a170"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -45,6 +45,13 @@
             "index": "pypi",
             "version": "==1.5.7"
         },
+        "flask-basicauth": {
+            "hashes": [
+                "sha256:df5ebd489dc0914c224419da059d991eb72988a01cdd4b956d52932ce7d501ff"
+            ],
+            "index": "pypi",
+            "version": "==0.2.0"
+        },
         "flask-login": {
             "hashes": [
                 "sha256:6d33aef15b5bcead780acc339464aae8a6e28f13c90d8b1cf9de8b549d1c0b4b",
@@ -82,6 +89,14 @@
             ],
             "index": "pypi",
             "version": "==0.56"
+        },
+        "flask-wtf": {
+            "hashes": [
+                "sha256:57b3faf6fe5d6168bda0c36b0df1d05770f8e205e18332d0376ddb954d17aef2",
+                "sha256:d417e3a0008b5ba583da1763e4db0f55a1269d9dd91dcc3eb3c026d3c5dbd720"
+            ],
+            "index": "pypi",
+            "version": "==0.14.3"
         },
         "inflect": {
             "hashes": [
