@@ -7,13 +7,13 @@ from flask import request, jsonify
 from werkzeug.security import generate_password_hash
 
 
-def add_user_view():
+def add_user_view(**kwargs):
     add_user = SysUser(
-        uuid=uuid.uuid4(),
-        username="",
-        password=generate_password_hash('123456'),
-        nick_name="",
-        header_img="",
+        uuid=str(uuid.uuid4()),
+        username=kwargs.get('username'),
+        password=generate_password_hash(kwargs.get('password')),
+        nick_name=kwargs.get('nick_name'),
+        header_img=kwargs.get('header_img'),
         authority_id="",
     )
     session.add(add_user)
