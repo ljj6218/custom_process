@@ -64,6 +64,16 @@ def login_view():
     return redirect(request.args.get('next') or url_for('index'))
 
 
+def add_user_view():
+    pass
+    return jsonify(dict(
+        code="0",
+        msg="成功",
+        data={},
+    ))
+
+
+
 def deletev_user_view():
     pass
     return jsonify(dict(
