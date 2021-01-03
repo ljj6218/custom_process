@@ -30,9 +30,9 @@ class SysUser(BaseModel, UserMixin):
             return False
         return check_password_hash(self.password, password)
 
-    @staticmethod
-    def add_user_view(self, **kwargs):
-        add_user = SysUser(
+    @classmethod
+    def add_user_view(cls, **kwargs):
+        add_user = cls(
             uuid=str(uuid.uuid4()),
             username=kwargs.get('username'),
             password=generate_password_hash(kwargs.get('password')),
