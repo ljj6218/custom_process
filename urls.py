@@ -1,17 +1,12 @@
 from app import app, login_manager, db
 from marshmallows import *
 from utils import *
+from forms import *
 from views import *
 import settings
 
 from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_required, login_user, logout_user
-from flask_login.mixins import AnonymousUserMixin
-
-from flask_wtf import FlaskForm
-
-from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, EqualTo
 
 
 @login_manager.user_loader
@@ -19,74 +14,21 @@ def get_user(id):
     return SysUser.query.get(int(id))
 
 
-class RegisterForm(FlaskForm):
-    """登录表单类"""
-    username = StringField('用户名', validators=[DataRequired()])
-    password = PasswordField('密码', validators=[DataRequired()])
-    password_2 = PasswordField('重复密码', validators=[DataRequired()])
-
-
-class LoginForm(FlaskForm):
-    """登录表单类"""
-    username = StringField('用户名', validators=[DataRequired()])
-    password = PasswordField('密码', validators=[DataRequired()])
-
-
 # 用户  注册
 @app.route('/register', methods=('GET', 'POST'))  # 登录
 def register():
-    form = RegisterForm()
-
-    if not form.validate_on_submit():
-        return render_template('register.html', form=form, emsg=None)
-
-    username = form.username.data
-    password = form.password.data
-    password_2 = form.password_2.data
-
-    if password != password_2:
-        return render_template('register.html', form=form, emsg="密码不一致")
-
-    user_obj = SysUser.query.filter_by(username=username).first()  # 从用户数据中查找该用户名
-
-    if user_obj is not None:
-        return render_template('register.html', form=form, emsg="用户名已存在")
-
-    create_user(username, password)
-
-    user_obj = SysUser.query.filter_by(username=username).first()  # 从用户数据中查找该用户名
-    login_user(user_obj, remember=True)  # 创建用户 Session
-
-    return redirect(request.args.get('next') or url_for('index'))
+    return register_view()
 
 
 # 用户登录
 @app.route('/login/', methods=('GET', 'POST'))  # 登录
 def login():
-    form = LoginForm()
-    emsg = None
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        user_obj = SysUser.query.filter_by(username=username).first()  # 从用户数据中查找该用户
-        if user_obj is None:
-            emsg = "用户名或密码有误"
-        if user_obj.verify_password(password):  # 校验密码
-            print("校验密码成功*----------")
-            login_user(user_obj, remember=True)  # 创建用户 Session
-            return redirect(request.args.get('next') or url_for('index'))
-        else:
-            print("校验密码失败*----------")
-            emsg = "用户名或密码密码有误"
-    return render_template('login.html', form=form, emsg=emsg)
+    return login_view()
 
 
 # 首页
 @app.route('/')
 def index():
-    print(current_user)
-    print(current_user.is_authenticated)
-    print(type(current_user))
     if current_user.is_authenticated:
         return render_template('index.html', username=current_user.username)
     return render_template('index.html', username=None)
