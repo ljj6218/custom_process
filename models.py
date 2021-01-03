@@ -3,6 +3,8 @@ from sqlalchemy import func
 from app import db
 from flask_login import UserMixin  # 引入用户基类
 from werkzeug.security import check_password_hash
+import uuid
+from werkzeug.security import generate_password_hash
 
 
 class BaseModel(db.Model):
@@ -22,38 +24,29 @@ class SysUser(BaseModel, UserMixin):
     header_img = db.Column(db.String(191), server_default=db.FetchedValue(), info='用户头像')
     authority_id = db.Column(db.String(90), server_default=db.FetchedValue(), info='用户角色ID')
 
-    # def __init__(self, user):
-    #     self.username = user.get("name")
-    #     self.password_hash = user.get("password")
-    #     self.id = user.get("id")
-
     def verify_password(self, password):
         """密码验证"""
         if self.password is None:
             return False
         return check_password_hash(self.password, password)
 
-    # def get_id(self):
-    #     """获取用户ID"""
-    #     return self.id
-
-    # @staticmethod
-    # def get(user_id):
-    #     """根据用户ID获取用户实体，为 login_user 方法提供支持"""
-    #     user_obj = SysUser.query.filter_by(id=user_id).first()
-    #     if not user_obj:
-    #         return
-    #     from marshmallows import SysUserSchema
-    #     sys_users_schema = SysUserSchema()
-    #     user_data = sys_users_schema.dump(user_obj)
-    #     print(user_data)
-    #     return user_data
-    #     # if not user_id:
-    #     #     return None
-    #     # for user in USERS:
-    #     #     if user.get('id') == user_id:
-    #     #         return User(user)
-    #     # return None
+    @staticmethod
+    def add_user_view(self, **kwargs):
+        add_user = SysUser(
+            uuid=str(uuid.uuid4()),
+            username=kwargs.get('username'),
+            password=generate_password_hash(kwargs.get('password')),
+            nick_name=kwargs.get('nick_name'),
+            header_img=kwargs.get('header_img'),
+            authority_id="",
+        )
+        db.session.add(add_user)
+        # session.commit()
+        # return jsonify(dict(
+        #     code="1",
+        #     msg="成功",
+        #     data={},
+        # ))
 
 
 class Machine(BaseModel):
