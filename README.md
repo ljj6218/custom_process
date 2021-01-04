@@ -15,7 +15,23 @@
 
     管，通过上面四种实体进行组合，实现一定的目的
 
-    模板 步骤 ——> 实际步骤 ——> 具体内容 ——> 日志
+    模板 ——> 计划 ——> 实际步骤 ——> 具体内容 ——> 日志
+    项目     设计图纸  施工图纸    实物         记账   
+    CustomProcessBase 0级
+            CustomProcessBase n级（记录人机物环管n级）
+                    人机物环管 关联表
+                                人机物环
+                                            日志
+    {name} 
+            {name, next}
+                    {name, plan_id}
+                               {step_id, type, id}
+                                          {type, id, log}
+    {name} 
+            {name, IdCard}
+                    {rel_ids, base_id}
+                               {case_id, rel_id}
+                                          {case_id, log}
 
 身份证号
 

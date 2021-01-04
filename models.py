@@ -41,12 +41,6 @@ class SysUser(BaseModel, UserMixin):
             authority_id="",
         )
         db.session.add(add_user)
-        # session.commit()
-        # return jsonify(dict(
-        #     code="1",
-        #     msg="成功",
-        #     data={},
-        # ))
 
 
 class Machine(BaseModel):
@@ -102,7 +96,7 @@ class Template(BaseModel):
 
 class IdCard(BaseModel):
     __tablename__ = 'id_card'
-    type = db.Column(db.Integer, info='类型')
+    type = db.Column(db.Integer, info='类型')     # 人机物环管
     id1 = db.Column(db.String(8))
     id2 = db.Column(db.String(8))
     id3 = db.Column(db.String(8))
@@ -115,7 +109,7 @@ class IdCard(BaseModel):
 
 class IdCardDecode(BaseModel):
     __tablename__ = 'id_card_decode'
-    name = db.Column(db.String(64))
+    name = db.Column(db.String(64), info='IdCard的id解析')
 
 
 class SysOperationRecord(BaseModel):
