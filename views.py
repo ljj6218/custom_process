@@ -2,6 +2,7 @@ from sqlalchemy import select
 from models import *
 from forms import *
 from utils import *
+from marshmallows import *
 from app import db
 import uuid
 session = db.session
@@ -35,7 +36,8 @@ def register_view():
     if user_obj is not None:
         return render_template('register.html', form=form, emsg="用户名已存在")
 
-    create_user(username, password)
+    SysUser.add_user_view(username=username, password=password)
+    db.session.commit()
 
     user_obj = SysUser.query.filter_by(username=username).first()  # 从用户数据中查找该用户名
     login_user(user_obj, remember=True)  # 创建用户 Session
@@ -73,9 +75,15 @@ def add_user_view():
     ))
 
 
-
-def deletev_user_view():
-    pass
+def delete_users_view():
+    ids = request.json.get('ids')
+    if not ids:
+        return jsonify(dict(
+            code="1",
+            msg="参数不能为空",
+            data={},
+        ))
+    delete_objs(SysUser, ids)
     return jsonify(dict(
         code="0",
         msg="成功",
@@ -84,7 +92,14 @@ def deletev_user_view():
 
 
 def update_user_view():
-    pass
+    id = request.json.get('id')
+    if not id:
+        return jsonify(dict(
+            code="1",
+            msg="id不能为空",
+            data={},
+        ))
+    update_model_obj(SysUser, **request.json)
     return jsonify(dict(
         code="0",
         msg="成功",
@@ -93,27 +108,25 @@ def update_user_view():
 
 
 def get_user_view():
-
+    id = request.args.get('id')
+    if not id:
+        return jsonify(dict(
+            code="1",
+            msg="id不能为空",
+            data={},
+        ))
+    data = get_info(SysUser, SysUserSchema, id)
     return jsonify(dict(
         code="0",
         msg="成功",
-        data={},
-    ))
-
-
-def deletev_users_view():
-    pass
-    return jsonify(dict(
-        code="0",
-        msg="成功",
-        data={},
+        data=data,
     ))
 
 
 def get_users_view():
-    pass
+    data = get_infos(model_class=SysUser, model_schema=SysUserSchema, **request.args)
     return jsonify(dict(
         code="0",
         msg="成功",
-        data={},
+        data=data,
     ))

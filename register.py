@@ -78,7 +78,7 @@ def text(response):  # 需要带参数
     print(request.method)
     print(response)
     print(response.is_json)
-    if request.method == "POST" and response.is_json:
+    if response.is_json:
         json_content = response.get_json()
         print(json_content)
         if json_content.get('code') != "0":

@@ -33,20 +33,15 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-# @app.route('/')
-# def hello_world():
-#     print(settings.AAA)
-#     return 'Hello World'
-#
-#
+
 @app.route('/user', methods=['POST'])
 def add_user():
     return add_user_view()
 
 
-@app.route('/user', methods=['DELETE'])
-def delete_user():
-    return deletev_user_view()
+@app.route('/users', methods=['DELETE'])
+def delete_users():
+    return delete_users_view()
 
 
 @app.route('/user', methods=['PUT'])
@@ -57,11 +52,6 @@ def update_user():
 @app.route('/user', methods=['GET'])
 def get_user():
     return get_user_view()
-
-
-@app.route('/users', methods=['DELETE'])
-def delete_users():
-    return deletev_users_view()
 
 
 @app.route('/users', methods=['GET'])
