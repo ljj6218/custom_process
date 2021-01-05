@@ -48,7 +48,7 @@ class Machine(BaseModel):
     name = db.Column(db.String(64), info='名称')
 
 
-class Good(BaseModel):
+class Goods(BaseModel):
     __tablename__ = 'goods'
     name = db.Column(db.String(64), info='名称')
 

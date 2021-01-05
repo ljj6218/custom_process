@@ -52,7 +52,7 @@ class SysOperationRecordModelView(ModelView):
 # Add administrative views herev
 admin.add_view(SysUserModelView(SysUser, db.session))
 admin.add_view(FileterNameModelView(Machine, db.session))
-admin.add_view(FileterNameModelView(Good, db.session))
+admin.add_view(FileterNameModelView(Goods, db.session))
 admin.add_view(FileterNameModelView(Environment, db.session))
 admin.add_view(CustomProcessBaseModelView(CustomProcessBase, db.session))
 admin.add_view(CustomProcessBaseUserRelModelView(CustomProcessBaseUserRel, db.session))
