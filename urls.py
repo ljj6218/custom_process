@@ -1,4 +1,4 @@
-from app import app, login_manager, db
+from app import app, login_manager, db, mongo_db
 from views import *
 import settings
 
@@ -55,6 +55,29 @@ def update_user():
 # 人  查  单个对象的详情
 @app.route('/user', methods=['GET'])
 def get_user():
+    # obj = mongo_db.connection["custom_process"]
+    # for i in dir(obj):
+    #     print("- " * 30)
+    #     print(i)
+    #     try:
+    #         print(getattr(obj, i))
+    #     except Exception as e:
+    #         print(e)
+    #         try:
+    #             print(getattr(obj, i)())
+    #         except Exception as e:
+    #             print(e)
+    # print()
+    # mongo_db.connection.custom_process.insert_one({"key1": "value1", "key2": "value2"})
+    # mongo_db.connection.custom_process.insert_one({"key1": "value1", "key2": "value2"})
+    from models_mongo import SysUserMongo
+    import datetime
+    u = SysUserMongo(sql_id=10086, created_at=datetime.datetime.now())
+    u.aaa = "123"
+    u.save()
+    print(SysUserMongo.objects.all())
+    for i in SysUserMongo.objects.all():
+        print(i)
     return get_user_view()
 
 

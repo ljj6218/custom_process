@@ -10,6 +10,12 @@ SQLALCHEMY_ECHO = True
 # BASIC_AUTH_USERNAME = 'admin'
 # BASIC_AUTH_PASSWORD = "123456"
 
+MONGODB_SETTINGS = {
+    'db': 'custom_process',
+    'host': 'localhost',
+    'port': 27017
+}
+
 try:
     from local_settings import *
 except Exception as e:

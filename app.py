@@ -4,14 +4,18 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_basicauth import BasicAuth
 import flask_login
 from flask_login import LoginManager
+from flask_mongoengine import MongoEngine
 
 app = Flask(__name__)
 
 # 加载配置
 app.config.from_object(settings)
 
-# 创建数据库连接
+# 创建mysql数据库连接
 db = SQLAlchemy(app)
+
+# 创建mongo数据库连接
+mongo_db = MongoEngine(app)
 
 basic_auth = BasicAuth(app)
 

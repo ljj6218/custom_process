@@ -15,6 +15,7 @@ flask-sqlacodegen = "*"
 pymysql = "*"
 flask-basicauth = "*"
 flask-wtf = "*"
+flask-mongoengine = "*"
 
 [dev-packages]
 

@@ -5,6 +5,7 @@ from utils import *
 from marshmallows import *
 from app import db
 import uuid
+
 session = db.session
 from flask import request, jsonify
 from flask import render_template, redirect, url_for, request
@@ -67,7 +68,39 @@ def login_view():
 
 
 def add_user_view():
-    pass
+    username = request.json.get('username')
+    password = request.json.get('password')
+    password_2 = request.json.get('password_2')
+
+    if not all([username, password, password_2]):
+        return jsonify(dict(
+            code="1",
+            msg="参数不全",
+            data={},
+        ))
+
+    if password != password_2:
+        return jsonify(dict(
+            code="1",
+            msg="密码不一致",
+            data={},
+        ))
+
+    user_obj = SysUser.query.filter_by(username=username).first()  # 从用户数据中查找该用户名
+
+    if user_obj is not None:
+        return jsonify(dict(
+            code="1",
+            msg="用户名已存在",
+            data={},
+        ))
+
+    SysUser.add_user_view(username=username, password=password)
+    db.session.commit()
+
+    user_obj = SysUser.query.filter_by(username=username).first()  # 从用户数据中查找该用户名
+    login_user(user_obj, remember=True)  # 创建用户 Session
+
     return jsonify(dict(
         code="0",
         msg="成功",
