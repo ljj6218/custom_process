@@ -72,12 +72,13 @@ def get_user():
     # mongo_db.connection.custom_process.insert_one({"key1": "value1", "key2": "value2"})
     from models_mongo import SysUserMongo
     import datetime
-    u = SysUserMongo(sql_id=10086, created_at=datetime.datetime.now())
-    u.aaa = "123"
-    u.save()
-    print(SysUserMongo.objects.all())
-    for i in SysUserMongo.objects.all():
-        print(i)
+    u = SysUserMongo._get_collection().insert_one({"key1": "value1", "key2": "value2"})
+    # u = SysUserMongo(sql_id=10086, created_at=datetime.datetime.now())
+    # u.aaa = "123"
+    # u.save()
+    # print(SysUserMongo.objects.all())
+    # for i in SysUserMongo.objects.all():
+    #     print(i)
     return get_user_view()
 
 
