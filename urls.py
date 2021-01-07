@@ -70,9 +70,13 @@ def get_user():
     # print()
     # mongo_db.connection.custom_process.insert_one({"key1": "value1", "key2": "value2"})
     # mongo_db.connection.custom_process.insert_one({"key1": "value1", "key2": "value2"})
-    from models_mongo import SysUserMongo
+    from models_mongo import SysUserMongo, MachineMongo
     import datetime
+    print(" -"*30)
+    print(SysUserMongo._get_collection())
+    print(MachineMongo._get_collection())
     u = SysUserMongo._get_collection().insert_one({"key1": "value1", "key2": "value2"})
+    print(" -"*30)
     # u = SysUserMongo(sql_id=10086, created_at=datetime.datetime.now())
     # u.aaa = "123"
     # u.save()
