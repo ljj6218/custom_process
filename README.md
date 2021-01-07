@@ -67,3 +67,35 @@
     人物：SysUser
     导出：json
     导入：json
+
+CustomProcessBase结构
+
+    id：唯一标识
+    parent_id：父级的唯一标识
+        1、他自身的抽象、模板
+        2、父级
+    condition，条件
+        other_obj.fields：
+        fields：
+    desc：描述
+    result，结果
+        key：value
+
+    时间：创建时间，更新时间
+
+    人：SysUser   rel表
+    机：Machine   rel表
+    物：Good   rel表
+    环：Environment   rel表
+
+新规则定义
+    
+    比如，选符合某个条件的人，做为某个管理的“SysUser   rel表”的来源：
+    1、添加，查询这个条件的人的代码，随时查询，
+    2、由设计者指定id列表，存储备用，
+    3、利用身份证体系，进行范围划定
+
+    
+    
+    
+
