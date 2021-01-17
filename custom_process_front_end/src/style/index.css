@@ -1,0 +1,8 @@
+.el-menu-item {
+    padding: 0;
+}
+
+.el-menu-item a {
+    display: block;
+    padding: 0 20px;
+}
