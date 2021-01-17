@@ -128,3 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/
+
+/custom_process_front_end/.idea/
+/custom_process_front_end/node_modules/
