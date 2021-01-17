@@ -10,8 +10,8 @@
 利用“人机物环管”五个要素之间的关系，描述业务逻辑的框架，  
 进行查询时，可以快速定位位置，了解过去已经发生的事，和未来需要做的事。  
 从而**降低复杂业务逻辑的学习成本，让新人快速上手业务处理，让老手更快找到需要的东西。**
-
-抽象化
+## 原理介绍
+ 抽象化
 
     理论 ——> 现实
 
@@ -105,7 +105,46 @@ CustomProcessBase结构
     2、由设计者指定id列表，存储备用，
     3、利用身份证体系，进行范围划定
 
+# 项目安装运行
+下载项目
+
+    git clone git@github.com:ljj6218/custom_process.git
+
+安装后端环境
+
+    pipenv install
+
+运行后端
+可以使用 flask 命令或者 python 的 -m 开关来运行这个应用。  
+在 运行应用之前，需要在终端里导出 FLASK_APP 环境变量:  
+
+    export FLASK_APP=hello.py  
+    flask run  
+如果是在 Windows 下，那么导出环境变量的语法取决于使用的是哪种命令行解释器。 在 Command Prompt 下:  
+
+    set FLASK_APP=hello.py
+    flask run
+在 PowerShell 下:
+
+    $env:FLASK_APP = "hello.py"
+    flask run
+还可以使用 python -m flask:
+
+    export FLASK_APP=hello.py
+    python -m flask run
+
+
+安装前端环境
+
+    cd web/
+    npm install -g cnpm --registry=https://registry.npm.taobao.org && npm install
+运行前端
+
+    npm run serve
     
+访问：  
+http://localhost:5000/  
+里面有前端跳转链接（http://localhost:8081/  ）和admin后台跳转链接（http://localhost:5000/admin/  ）
     
     
 
