@@ -5,8 +5,14 @@ from flask_basicauth import BasicAuth
 import flask_login
 from flask_login import LoginManager
 from flask_mongoengine import MongoEngine
+# from flask_cors import CORS
 
 app = Flask(__name__)
+
+# 自动在报文头部加入相应内容，没起作用
+# CORS(app, resources=r'/*')
+# CORS(app, supports_credentials=True)
+# CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # 加载配置
 app.config.from_object(settings)

@@ -16,6 +16,7 @@ pymysql = "*"
 flask-basicauth = "*"
 flask-wtf = "*"
 flask-mongoengine = "*"
+flask-cors = "*"
 
 [dev-packages]
 

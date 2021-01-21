@@ -1,7 +1,7 @@
 from app import app, login_manager, db, mongo_db
 from views import *
 import settings
-
+from flask_cors import cross_origin
 
 @login_manager.user_loader
 def get_user(id):
@@ -32,6 +32,28 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+# 人  增
+@app.route('/new', methods=['OPTIONS', 'POST'])
+@cross_origin()
+def add_mongo():
+
+    print(request.json)
+    print(request.json)
+    print(request.json)
+    from models_mongo import SysUserMongo, MachineMongo
+    import datetime
+    print(" -" * 30)
+    print(SysUserMongo._get_collection())
+    print(MachineMongo._get_collection())
+    u = SysUserMongo._get_collection().insert_one(dict(root=request.json))
+    print(" -" * 30)
+    return jsonify(dict(
+        code="0",
+        msg="成功",
+        data={},
+    ))
 
 
 # 人  增
@@ -70,13 +92,7 @@ def get_user():
     # print()
     # mongo_db.connection.custom_process.insert_one({"key1": "value1", "key2": "value2"})
     # mongo_db.connection.custom_process.insert_one({"key1": "value1", "key2": "value2"})
-    from models_mongo import SysUserMongo, MachineMongo
-    import datetime
-    print(" -"*30)
-    print(SysUserMongo._get_collection())
-    print(MachineMongo._get_collection())
-    u = SysUserMongo._get_collection().insert_one({"key1": "value1", "key2": "value2"})
-    print(" -"*30)
+
     # u = SysUserMongo(sql_id=10086, created_at=datetime.datetime.now())
     # u.aaa = "123"
     # u.save()

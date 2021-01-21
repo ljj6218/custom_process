@@ -11,7 +11,7 @@
       :render-content="renderContent">
     </el-tree>
   </div>
-  <div class="block">
+  <!-- <div class="block">
     <p>使用 scoped slot</p>
     <el-tree
       :data="data"
@@ -37,10 +37,27 @@
         </span>
       </span>
     </el-tree>
-  </div>
+  </div> -->
+    <div style="text-align:center">
+      <el-button type="success" icon="el-icon-check" circle @click="submitData"></el-button>
+      <el-button type="danger" icon="el-icon-delete" circle @click="deleteAll"></el-button>
+      <el-button round type="success" icon="el-icon-check" @click="submitData"></el-button>
+      <el-button round type="danger" icon="el-icon-delete" @click="deleteAll"></el-button>
+
+    </div>
+  <!-- <div>
+    <el-row>
+      <el-button icon="el-icon-search" circle></el-button>
+      <el-button type="primary" icon="el-icon-edit" circle></el-button>
+      <el-button type="info" icon="el-icon-message" circle></el-button>
+      <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+    </el-row>
+  </div> -->
 </div>
 </template>
 <script>
+import axios from 'axios'
+// import qs from 'qs'
   let id = 1000;
 
   export default {
@@ -87,6 +104,36 @@
     },
 
     methods: {
+      jiaohuanneirong(){
+        console.log("jiaohuanneirong this.data");
+      },
+      submitData() {
+        console.log("submitData this.data");
+        console.log(this.data);
+        // axios.post("http://127.0.0.1:5000/new", qs.stringify(this.data))
+       
+        //在需要的事件中直接使用
+        axios({
+            url:'http://127.0.0.1:5000/new',
+            method: 'post',
+            data:this.data,
+            header:{
+                'Content-Type':'application/json'  //如果写成contentType会报错
+            }
+        })
+        .then(res=>{
+            console.log(res.data)
+        })
+        .catch(Error=>{
+            console.log(Error)
+        })
+
+      },
+      deleteAll() {
+        console.log("deleteAll this.data");
+        console.log(this.data);
+        
+      },
       append(data) {
         const newChild = { id: id++, label: 'testtest', children: [] };
         if (!data.children) {
@@ -126,5 +173,8 @@
     justify-content: space-between;
     font-size: 14px;
     padding-right: 8px;
+  }
+  .custom-tree-container {
+    display: inline-grid;
   }
 </style>

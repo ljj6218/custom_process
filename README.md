@@ -126,7 +126,7 @@ CustomProcessBase结构
     flask run
 在 PowerShell 下:
 
-    $env:FLASK_APP = "hello.py"
+    FLASK_APP = "hello.py"
     flask run
 还可以使用 python -m flask:
 
