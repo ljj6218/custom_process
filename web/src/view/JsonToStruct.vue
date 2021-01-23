@@ -1,6 +1,6 @@
 <template>
   <div class="custom-tree-container">
-  <div class="block">
+  <!-- <div class="block">
     <p>使用 render-content</p>
     <el-tree
       :data="data"
@@ -10,8 +10,8 @@
       :expand-on-click-node="false"
       :render-content="renderContent">
     </el-tree>
-  </div>
-  <!-- <div class="block">
+  </div> -->
+  <div class="block">
     <p>使用 scoped slot</p>
     <el-tree
       :data="data"
@@ -22,22 +22,23 @@
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>
         <span>
+          <el-button type="text" @click="editLabel(node, data)">编辑</el-button>
           <el-button
             type="text"
             size="mini"
             @click="() => append(data)">
-            Append
+            添加
           </el-button>
           <el-button
             type="text"
             size="mini"
             @click="() => remove(node, data)">
-            Delete
+            删除
           </el-button>
         </span>
       </span>
     </el-tree>
-  </div> -->
+  </div>
     <div style="text-align:center">
       <el-button type="success" icon="el-icon-check" circle @click="submitData"></el-button>
       <el-button type="danger" icon="el-icon-delete" circle @click="deleteAll"></el-button>
@@ -135,7 +136,9 @@ import axios from 'axios'
         
       },
       append(data) {
-        const newChild = { id: id++, label: 'testtest', children: [] };
+        const idNew = id + 1
+        id++
+        const newChild = { id: idNew, label: idNew.toString(), children: [] };
         if (!data.children) {
           this.$set(data, 'children', []);
         }
@@ -143,6 +146,8 @@ import axios from 'axios'
       },
 
       remove(node, data) {
+        console.log(node);
+        console.log(data);
         const parent = node.parent;
         const children = parent.data.children || parent.data;
         const index = children.findIndex(d => d.id === data.id);
@@ -159,6 +164,30 @@ import axios from 'axios'
               <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
+      },
+
+      editLabel(node, data) {
+
+        console.log(node);
+        console.log(data);
+
+        this.$prompt('请输入新的名称', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(({ value }) => {
+          
+          console.log(value);
+          this.$set(data, 'label', value);
+          this.$message({
+            type: 'success',
+            message: '成功: ' + value
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });       
+        });
       }
     }
   };
