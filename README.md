@@ -143,8 +143,12 @@ CustomProcessBase结构
     npm run serve
     
 访问：  
-http://localhost:5000/  
-里面有前端跳转链接（http://localhost:8081/  ）和admin后台跳转链接（http://localhost:5000/admin/  ）
+    [主页：http://localhost:5000/](http://localhost:5000/)  
+里面有  
+    [前端跳转链接：http://localhost:8080/](http://localhost:8080/)  
+    [admin后台跳转链接：http://localhost:5000/admin/](http://localhost:5000/admin/)  
+    
+
     
     
 
