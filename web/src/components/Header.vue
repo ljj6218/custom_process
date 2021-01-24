@@ -15,8 +15,8 @@
 <script>
 var menuList = [
   {
-    'router':'#/JsonToStruct',
-    'name':'Json 转 Go Struct',
+    'router':'#/CustomProcessBase',
+    'name':'管理 详情页',
   },
   {
     'router':'#/Thank',

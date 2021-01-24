@@ -8,16 +8,16 @@ export const constantRoutes = [
   {
     path: '/',
     name: 'index',
-    redirect: '/JsonToStruct',
+    redirect: '/CustomProcessBase',
     hidden: true,
     meta: { title: 'Json 转 Struct' }
   },
   {
-    path: '/JsonToStruct',
-    name: 'JsonToStruct',
+    path: '/CustomProcessBase',
+    name: 'CustomProcessBase',
     hidden: true,
-    component: () => import('@/view/JsonToStruct.vue'),
-    meta: { title: 'Json 转 Struct' }
+    component: () => import('@/view/CustomProcessBase.vue'),
+    meta: { title: '管理 详情页' }
   },
   {
     path: '/Thank',
